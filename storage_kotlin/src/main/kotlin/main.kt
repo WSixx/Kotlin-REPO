@@ -1,13 +1,33 @@
-fun main(args: Array<String>) {
-    println("Enter")
+import java.io.FileReader
+import java.io.FileWriter
 
+fun main(args: Array<String>) {
+
+    writeToFile("Ana")
+
+    readFromFile()
+
+}
+
+fun writeToFile(str:String){
     try {
-        var n2:Int= readLine()!!.toInt()
-        var div=100/n2
-        println("Div: $div")
+        var fo=FileWriter("name.txt", true)
+        fo.write(str + "\n")
+        fo.close()
     }catch (ex:Exception){
         println(ex.message)
     }
+}
 
-    println("Is done")
+fun readFromFile(){
+    try {
+        var fin=FileReader("name.txt")
+        var c:Int?
+        do {
+            c = fin.read()
+            print(c.toChar())
+        }while (c!= -1)
+    }catch (ex:Exception){
+        println(ex.message)
+    }
 }
