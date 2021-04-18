@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if(emptyCells.size == 0){
+            restartGame()
+        }
+
         var r = Random
         val randIndex = r.nextInt(emptyCells.size)
         val cellId = emptyCells[randIndex]
