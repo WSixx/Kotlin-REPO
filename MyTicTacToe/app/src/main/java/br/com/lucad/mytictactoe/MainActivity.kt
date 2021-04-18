@@ -7,11 +7,19 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import br.com.lucad.mytictactoe.databinding.ActivityMainBinding
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
     }
 
     fun btnClick(view: View){
@@ -41,20 +49,48 @@ class MainActivity : AppCompatActivity() {
     var player1 = ArrayList<Int>()
     var player2 = ArrayList<Int>()
 
-    private fun playGame(cellId: Int, btnSelect:Button ){
+    private fun playGame(cellId: Int, btnSelect:Button? ){
         if(activePlayer == 1){
-            btnSelect.text = "X"
-            btnSelect.setBackgroundResource(R.color.blue)
+            btnSelect?.text = "X"
+            btnSelect?.setBackgroundResource(R.color.blue)
             activePlayer = 2
+            autoPlay()
         }else{
-            btnSelect.text = "O"
-            btnSelect.setBackgroundResource(R.color.darkGreen)
+            btnSelect?.text = "O"
+            btnSelect?.setBackgroundResource(R.color.darkGreen)
             activePlayer = 1
 
         }
-        btnSelect.isEnabled = false
+        btnSelect?.isEnabled = false
 
         checkWinner()
+    }
+
+    private fun autoPlay() {
+        var emptyCells = ArrayList<Int>()
+        for (cellId in 1..9){
+            if(!(player1.contains(cellId) || player2.contains(cellId))){
+                emptyCells.add(cellId)
+            }
+        }
+
+        var r = Random
+        val randIndex = r.nextInt(emptyCells.size)
+        val cellId = emptyCells[randIndex]
+
+        var btnSelected: Button? = when(cellId){
+            1-> binding.btn1
+            2-> binding.btn2
+            3-> binding.btn3
+            4-> binding.btn4
+            5-> binding.btn5
+            6-> binding.btn6
+            7-> binding.btn7
+            8-> binding.btn8
+            9-> binding.btn9
+            else -> {binding.btn1}
+        }
+        playGame(cellId, btnSelected )
     }
 
     private fun checkWinner() {
@@ -115,11 +151,43 @@ class MainActivity : AppCompatActivity() {
         }
 
         if(winner == 1){
-            Toast.makeText(this, "Player 1 is the Winner", Toast.LENGTH_LONG)
+            player1WinsCounts += 1
+            Toast.makeText(this, "Player 1 is the Winner", Toast.LENGTH_LONG).show()
+            restartGame()
         }else if(winner == 2){
-            Toast.makeText(this, "Player 2 is the Winner", Toast.LENGTH_LONG)
+            player2WinsCounts += 1
+            Toast.makeText(this, "Player 2 is the Winner", Toast.LENGTH_LONG).show()
+            restartGame()
         }
 
+    }
+
+    var player1WinsCounts = 0
+    var player2WinsCounts = 0
+
+    private fun restartGame(){
+        activePlayer = 1
+        player1.clear()
+        player2.clear()
+
+        for(cellId in 1..9){
+            var btnSelected: Button? = when(cellId){
+                1-> binding.btn1
+                2-> binding.btn2
+                3-> binding.btn3
+                4-> binding.btn4
+                5-> binding.btn5
+                6-> binding.btn6
+                7-> binding.btn7
+                8-> binding.btn8
+                9-> binding.btn9
+                else -> {binding.btn1}
+            }
+            btnSelected!!.text = ""
+            btnSelected!!.setBackgroundResource(R.color.white)
+
+        }
+        Toast.makeText(this, "Player1 : $player1WinsCounts | Player2 : $player2WinsCounts", Toast.LENGTH_LONG).show()
     }
 
 }
