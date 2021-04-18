@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
 
     var activePlayer = 1
 
-    var player1 = ArrayList<Int>()
-    var player2 = ArrayList<Int>()
+    private var player1 = ArrayList<Int>()
+    private var player2 = ArrayList<Int>()
 
-    private fun playGame(cellId: Int, btnSelect:Button? ){
+    fun playGame(cellId: Int, btnSelect:Button? ){
         if(activePlayer == 1){
             btnSelect?.text = "X"
             btnSelect?.setBackgroundResource(R.color.blue)
@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity() {
         player1.clear()
         player2.clear()
 
+
         for(cellId in 1..9){
             var btnSelected: Button? = when(cellId){
                 1-> binding.btn1
@@ -185,6 +186,7 @@ class MainActivity : AppCompatActivity() {
             }
             btnSelected!!.text = ""
             btnSelected!!.setBackgroundResource(R.color.white)
+            btnSelected!!.isEnabled = true
 
         }
         Toast.makeText(this, "Player1 : $player1WinsCounts | Player2 : $player2WinsCounts", Toast.LENGTH_LONG).show()
