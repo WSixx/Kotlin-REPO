@@ -1,9 +1,11 @@
 package br.com.lucad.filmesflixkotlin.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.lucad.filmesflixkotlin.model.Movie
 
-class ModelListViewModel: ViewModel() {
+class MovieListViewModel: ViewModel() {
 
     private val listOfMovies = arrayListOf(
         Movie(
@@ -23,13 +25,14 @@ class ModelListViewModel: ViewModel() {
         ),
     )
 
-    private
-
+    private var _movieList = MutableLiveData<List<Movie>>()
+    val movieList: LiveData<List<Movie>>
+    get() = _movieList
     fun init(){
         getAllMovies()
     }
 
     private fun getAllMovies(){
-
+        _movieList.value = listOfMovies
     }
 }
