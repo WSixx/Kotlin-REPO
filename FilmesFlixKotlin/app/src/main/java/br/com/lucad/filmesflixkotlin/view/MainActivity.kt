@@ -2,6 +2,7 @@ package br.com.lucad.filmesflixkotlin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import br.com.lucad.filmesflixkotlin.R
 import br.com.lucad.filmesflixkotlin.model.Movie
@@ -19,11 +20,15 @@ class MainActivity : AppCompatActivity() {
         movieListViewModel = ViewModelProvider.NewInstanceFactory().create(MovieListViewModel::class.java)
         movieListViewModel.init()
         initObserver()
+        loadVisibility(true)
     }
 
     private fun initObserver(){
         movieListViewModel.movieList.observe(this, { list ->
-            populateList(list)
+            if(list.isNotEmpty()){
+                populateList(list)
+                loadVisibility(false)
+            }
         })
     }
 
@@ -32,5 +37,10 @@ class MainActivity : AppCompatActivity() {
             hasFixedSize()
             adapter = MoviesAdapter(list)
         }
+    }
+
+    private fun loadVisibility(isLoading: Boolean){
+        progressBar.visibility = if(isLoading) View.VISIBLE else View.GONE
+
     }
 }

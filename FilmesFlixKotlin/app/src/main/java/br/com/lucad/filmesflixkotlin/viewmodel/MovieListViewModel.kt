@@ -1,38 +1,39 @@
 package br.com.lucad.filmesflixkotlin.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.lucad.filmesflixkotlin.api.MovieRestApiTask
 import br.com.lucad.filmesflixkotlin.model.Movie
+import br.com.lucad.filmesflixkotlin.repository.MovieRepository
+import java.lang.Exception
 
 class MovieListViewModel: ViewModel() {
 
-    private val listOfMovies = arrayListOf(
-        Movie(
-            id = 0,
-            titulo = "Titanic",
-            descricao = null,
-            imagem = null,
-            dataLancamento = null
-        ),
+    companion object{
+        const val TAG = "MovieRepository"
+    }
 
-        Movie(
-            id = 1,
-            titulo = "Iluminado",
-            descricao = null,
-            imagem = null,
-            dataLancamento = null
-        ),
-    )
+    private val movieRestApiTask = MovieRestApiTask()
+    private val movieRepository = MovieRepository(movieRestApiTask)
 
     private var _movieList = MutableLiveData<List<Movie>>()
     val movieList: LiveData<List<Movie>>
-    get() = _movieList
+        get() = _movieList
+
+
     fun init(){
         getAllMovies()
     }
 
     private fun getAllMovies(){
-        _movieList.value = listOfMovies
+        Thread{
+            try {
+                _movieList.postValue(movieRepository.getAllMovies())
+            }catch (exception: Exception){
+                Log.d(TAG, exception.message.toString())
+            }
+        }.start()
     }
 }
