@@ -1,12 +1,14 @@
-package br.com.lucad.filmesflixkotlin.viewmodel
+package br.com.lucad.filmesflixkotlin.framework.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.com.lucad.filmesflixkotlin.api.MovieRestApiTask
-import br.com.lucad.filmesflixkotlin.model.Movie
-import br.com.lucad.filmesflixkotlin.repository.MovieRepository
+import br.com.lucad.filmesflixkotlin.framework.api.MovieRestApiTask
+import br.com.lucad.filmesflixkotlin.data.MovieRepository
+import br.com.lucad.filmesflixkotlin.domain.Movie
+import br.com.lucad.filmesflixkotlin.implemetation.MovieDataSourceImplementation
+import br.com.lucad.filmesflixkotlin.usecase.MovieListUseCase
 import java.lang.Exception
 
 class MovieListViewModel: ViewModel() {
@@ -16,7 +18,10 @@ class MovieListViewModel: ViewModel() {
     }
 
     private val movieRestApiTask = MovieRestApiTask()
-    private val movieRepository = MovieRepository(movieRestApiTask)
+    private val movieDataSource = MovieDataSourceImplementation(movieRestApiTask)
+    private val movieRepository = MovieRepository(movieDataSource)
+    private val movieListUSeCase = MovieListUseCase(movieRepository)
+
 
     private var _movieList = MutableLiveData<List<Movie>>()
     val movieList: LiveData<List<Movie>>
@@ -30,7 +35,7 @@ class MovieListViewModel: ViewModel() {
     private fun getAllMovies(){
         Thread{
             try {
-                _movieList.postValue(movieRepository.getAllMovies())
+                _movieList.postValue(movieListUSeCase.invoke())
             }catch (exception: Exception){
                 Log.d(TAG, exception.message.toString())
             }

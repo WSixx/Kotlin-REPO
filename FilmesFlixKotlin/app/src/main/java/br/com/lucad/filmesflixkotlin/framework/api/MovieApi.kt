@@ -1,6 +1,6 @@
-package br.com.lucad.filmesflixkotlin.api
+package br.com.lucad.filmesflixkotlin.framework.api
 
-import br.com.lucad.filmesflixkotlin.model.Movie
+import br.com.lucad.filmesflixkotlin.domain.Movie
 import retrofit2.Call
 import retrofit2.http.GET
 

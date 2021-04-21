@@ -1,4 +1,4 @@
-package br.com.lucad.filmesflixkotlin.api
+package br.com.lucad.filmesflixkotlin.framework.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package br.com.lucad.filmesflixkotlin.view
+package br.com.lucad.filmesflixkotlin.presenter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -1,11 +1,11 @@
-package br.com.lucad.filmesflixkotlin.view
+package br.com.lucad.filmesflixkotlin.presenter
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.lucad.filmesflixkotlin.R
-import br.com.lucad.filmesflixkotlin.model.Movie
+import br.com.lucad.filmesflixkotlin.domain.Movie
 import coil.load
 import kotlinx.android.synthetic.main.movie_item_layout.view.*
 

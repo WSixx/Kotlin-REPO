@@ -1,12 +1,12 @@
-package br.com.lucad.filmesflixkotlin.view
+package br.com.lucad.filmesflixkotlin.presenter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import br.com.lucad.filmesflixkotlin.R
-import br.com.lucad.filmesflixkotlin.model.Movie
-import br.com.lucad.filmesflixkotlin.viewmodel.MovieListViewModel
+import br.com.lucad.filmesflixkotlin.domain.Movie
+import br.com.lucad.filmesflixkotlin.framework.viewmodel.MovieListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
