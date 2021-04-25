@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -25,9 +26,10 @@
 
             <TextView
                 android:id="@+id/textview_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="baboon"
+                android:textColor="@color/purple_700"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -35,6 +37,7 @@
                 android:id="@+id/textview_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/purple_700"
                 android:text="baboon is an animal with lives in nature" />
 
         </LinearLayout>
