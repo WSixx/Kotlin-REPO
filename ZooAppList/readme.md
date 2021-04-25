@@ -1,1 +1,1 @@
-Hello
+App que mostra lista de animais usando ListView
