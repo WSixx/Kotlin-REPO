@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/gray"
+    android:padding="5pt">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/background">
+
+        <ImageView
+            android:id="@+id/imageview_animal"
+            android:layout_width="50pt"
+            android:layout_height="50pt"
+            android:src="@drawable/baboon"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="baboon"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="baboon is an animal with lives in nature" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+
+    
+
+
+</LinearLayout>
