@@ -20,17 +20,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //load animals
         listOfAnimals.add(
-            Animal("Baboon", "Baboon lives there", R.drawable.baboon))
+            Animal("Baboon", "Baboon lives there", R.drawable.baboon, false))
         listOfAnimals.add(
-            Animal("Bulldog", "Bulldog lives there in city", R.drawable.bulldog))
+            Animal("Bulldog", "Bulldog lives there in city", R.drawable.bulldog, false))
         listOfAnimals.add(
-            Animal("Panda", "Panda lives in Japan", R.drawable.panda))
+            Animal("Panda", "Panda lives in Japan", R.drawable.panda, false))
         listOfAnimals.add(
-            Animal("Zebra", "Zebra lives there in Africa", R.drawable.zebra))
+            Animal("Zebra", "Zebra lives there in Africa", R.drawable.zebra, false))
         listOfAnimals.add(
-            Animal("White Tiger", "White Tiger lives there in Jungle", R.drawable.white_tiger))
+            Animal("White Tiger", "White Tiger lives there in Jungle", R.drawable.white_tiger, true))
         listOfAnimals.add(
-            Animal("Swallow Bird", "Swallow Bird lives there", R.drawable.swallow_bird))
+            Animal("Swallow Bird", "Swallow Bird lives there", R.drawable.swallow_bird, false))
         adapter = AnimalsAdapter(this, listOfAnimals)
         textview_list_animal.adapter = adapter
     }
@@ -57,11 +57,21 @@ class MainActivity : AppCompatActivity() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val animal = listOfAnimals[position]
-            var inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var myView = inflator.inflate(R.layout.animal_ticket, null)
-            myView.textview_name.text = animal.name
-            myView.textview_description.text = animal.description
-            myView.imageview_animal.setImageResource(animal.image!!)
+            var myView: View
+            if(animal.isKiller == true){
+                var inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                myView = inflator.inflate(R.layout.animal_killer_ticket, null)
+                myView.textview_name.text = animal.name
+                myView.textview_description.text = animal.description
+                myView.imageview_animal.setImageResource(animal.image!!)
+            }else{
+                var inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                myView = inflator.inflate(R.layout.animal_ticket, null)
+                myView.textview_name.text = animal.name
+                myView.textview_description.text = animal.description
+                myView.imageview_animal.setImageResource(animal.image!!)
+            }
+
             return  myView
         }
     }
