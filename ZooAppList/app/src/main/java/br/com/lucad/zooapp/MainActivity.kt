@@ -1,12 +1,14 @@
 package br.com.lucad.zooapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.core.content.ContextCompat.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.animal_ticket.view.*
 
@@ -35,7 +37,12 @@ class MainActivity : AppCompatActivity() {
         textview_list_animal.adapter = adapter
     }
 
-    class AnimalsAdapter(context: Context, listOfAnimals: ArrayList<Animal>):BaseAdapter(){
+    fun delete(index: Int){
+        listOfAnimals.removeAt(index)
+        adapter!!.notifyDataSetChanged()
+    }
+
+   inner class AnimalsAdapter(context: Context, listOfAnimals: ArrayList<Animal>):BaseAdapter(){
         var listOfAnimals = ArrayList<Animal>()
         var context = context
 
@@ -55,6 +62,8 @@ class MainActivity : AppCompatActivity() {
            return position.toLong()
         }
 
+
+
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val animal = listOfAnimals[position]
             var myView: View
@@ -64,12 +73,36 @@ class MainActivity : AppCompatActivity() {
                 myView.textview_name.text = animal.name
                 myView.textview_description.text = animal.description
                 myView.imageview_animal.setImageResource(animal.image!!)
+                myView.setOnLongClickListener {
+                    delete(position)
+                    return@setOnLongClickListener true
+                }
+                myView.setOnClickListener {
+                    delete(position)
+                    val intent = Intent(context, AnimalInfo::class.java)
+                    intent.putExtra("name", animal.name!!)
+                    intent.putExtra("description", animal.description!!)
+                    intent.putExtra("image", animal.image!!)
+                    context.startActivity(intent)
+                }
             }else{
                 var inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 myView = inflator.inflate(R.layout.animal_ticket, null)
                 myView.textview_name.text = animal.name
                 myView.textview_description.text = animal.description
                 myView.imageview_animal.setImageResource(animal.image!!)
+                myView.setOnLongClickListener {
+                    delete(position)
+                    return@setOnLongClickListener true
+                }
+                myView.setOnClickListener {
+                    val intent = Intent(context, AnimalInfo::class.java)
+                    intent.putExtra("name", animal.name!!)
+                    intent.putExtra("description", animal.description!!)
+                    intent.putExtra("image", animal.image!!)
+                    context.startActivity(intent)
+
+                }
             }
 
             return  myView
