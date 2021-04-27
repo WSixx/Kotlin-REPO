@@ -41,27 +41,15 @@ class MainActivity : AppCompatActivity() {
         listOfAnimals.removeAt(index)
         adapter!!.notifyDataSetChanged()
     }
+    fun addAnimal(index: Int){
+        listOfAnimals.add(listOfAnimals[index])
+        adapter!!.notifyDataSetChanged()
+
+    }
 
    inner class AnimalsAdapter(context: Context, listOfAnimals: ArrayList<Animal>):BaseAdapter(){
         var listOfAnimals = ArrayList<Animal>()
         var context = context
-
-        init {
-            this.listOfAnimals = listOfAnimals
-        }
-
-        override fun getCount(): Int {
-            return listOfAnimals.size
-        }
-
-        override fun getItem(position: Int): Any {
-            return listOfAnimals[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-           return position.toLong()
-        }
-
 
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -104,9 +92,26 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
             return  myView
         }
-    }
+
+
+       init {
+           this.listOfAnimals = listOfAnimals
+       }
+
+       override fun getCount(): Int {
+           return listOfAnimals.size
+       }
+
+       override fun getItem(position: Int): Any {
+           return listOfAnimals[position]
+       }
+
+       override fun getItemId(position: Int): Long {
+           return position.toLong()
+       }
+
+   }
 
 }
