@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyNotesSql</string>
+    <string name="title_ticket">Title</string>
+    <string name="content_ticket">content</string>
+    <string name="edit_button_ticket">Edit</string>
+    <string name="delete_button_ticket">Delete</string>
 </resources>
