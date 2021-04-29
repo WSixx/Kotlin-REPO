@@ -1,12 +1,11 @@
-package br.com.lucad.brqandroid
+package br.com.lucad.mynotessql
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-
-class LoginActivity2 : AppCompatActivity() {
+class AddNotes : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login2)
+        setContentView(R.layout.activity_add_notes)
     }
 }
